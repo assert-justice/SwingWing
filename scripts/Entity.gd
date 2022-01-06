@@ -16,7 +16,7 @@ func wake():
 func sleep():
 	pause_mode = PAUSE_MODE_STOP
 	visible = false
-	pool.sleep()
+	pool.sleep(self)
 
 func _physics_process(delta):
 	translate(velocity * delta)

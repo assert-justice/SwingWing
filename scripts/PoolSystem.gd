@@ -18,6 +18,8 @@ func _ready():
 		"enemy_miniboss" : Pool.new(enemy_miniboss_scene),
 		"enemy_boss" : Pool.new(enemy_boss_scene),
 	}
+	for pool in pools:
+		add_child(pools[pool])
 
 func get_pool(pool_name):
 	return pools[pool_name]

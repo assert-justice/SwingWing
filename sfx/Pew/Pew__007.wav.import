@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Pew__007.wav-4d47c7e19dfde1918111187d9b66c490.sample"
+
+[deps]
+
+source_file="res://sfx/Pew/Pew__007.wav"
+dest_files=[ "res://.import/Pew__007.wav-4d47c7e19dfde1918111187d9b66c490.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

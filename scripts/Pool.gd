@@ -14,7 +14,8 @@ func _init(scene):
 
 func new_ent():
 	var ent : Entity = scene.instance()
-	get_tree().root.add_child(ent)
+	get_tree().get_nodes_in_group("Game")[0].add_child(ent)
+	#get_tree().root.add_child(ent)
 	return ent
 
 func get_entity():
@@ -25,6 +26,7 @@ func get_entity():
 		ent = new_ent()
 	active.push_back(ent)
 	ent.wake()
+	return ent
 
 func sleep(ent):
 	active.erase(ent)
