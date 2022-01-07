@@ -9,6 +9,7 @@ var velocity = Vector2()
 
 func _ready():
 	controller = Controller.new("mk")
+	set_mode(0)
 
 func _physics_process(delta):
 	controller.update(delta)
@@ -40,5 +41,5 @@ func spin():
 
 func set_mode(mode):
 	self.mode = mode
-	#$AnimationPlayer.play(str(mode))
+	$AnimationPlayer.play(str(mode))
 	
