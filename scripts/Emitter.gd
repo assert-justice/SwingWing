@@ -1,11 +1,11 @@
 extends Node2D
 
-export var pool_name = ""
+export var pool_name = "bullet"
 
 export var fire_time = 1.0
 var fire_clock = 0
 export var enabled = true
-export (Vector2) var direction
+export (Vector2) var direction = Vector2.RIGHT
 export var speed = 400
 
 var pool : Pool

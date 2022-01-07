@@ -18,7 +18,6 @@ func _physics_process(delta):
 		velocity *= speed_co
 	if controller.spin_button > 0:
 		spin()
-	print(position)
 	translate(velocity)
 	if position.x < 0:
 		position.x = 0
@@ -41,5 +40,5 @@ func spin():
 
 func set_mode(mode):
 	self.mode = mode
-	$AnimationPlayer.play(str(mode))
+	#$AnimationPlayer.play(str(mode))
 	
