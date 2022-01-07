@@ -18,3 +18,4 @@ enemy_basic_scene = ExtResource( 4 )
 position = Vector2( 244, 123 )
 
 [node name="Enemy" parent="." instance=ExtResource( 4 )]
+velocity = Vector2( 0, 30 )

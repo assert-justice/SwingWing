@@ -1,11 +1,14 @@
-extends Node2D
+extends Entity
 
 export var speed = 200
 export var speed_co = 1.0
 export var mode = 0
 
 var controller : Controller
-var velocity = Vector2()
+
+func damage(dam):
+	.damage(dam)
+	print("player damaged")
 
 func _ready():
 	controller = Controller.new("mk")
