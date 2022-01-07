@@ -10,7 +10,6 @@ func set_pool(pool):
 	self.pool = pool
 
 func wake():
-	print("wake")
 	pause_mode = PAUSE_MODE_INHERIT
 	visible = true
 

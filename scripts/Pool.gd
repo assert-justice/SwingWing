@@ -24,6 +24,7 @@ func get_entity():
 		ent = inactive.pop_back()
 	else:
 		ent = new_ent()
+		ent.set_pool(self)
 	active.push_back(ent)
 	ent.wake()
 	return ent
