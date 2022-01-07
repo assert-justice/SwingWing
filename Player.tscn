@@ -114,6 +114,7 @@ __meta__ = {
 [node name="Emitter" parent="." instance=ExtResource( 3 )]
 fire_time = 0.1
 direction = Vector2( 0, -1 )
+speed = 200
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/0 = SubResource( 7 )

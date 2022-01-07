@@ -3,6 +3,7 @@ extends Node
 class_name PoolSystem
 
 export (PackedScene) var bullet_scene
+export (PackedScene) var enemy_bullet_scene
 export (PackedScene) var enemy_basic_scene
 export (PackedScene) var enemy_flanker_scene
 export (PackedScene) var enemy_miniboss_scene
@@ -13,6 +14,7 @@ var pools : Dictionary
 func _ready():
 	pools = {
 		"bullet" : Pool.new(bullet_scene),
+		"enemy_bullet" : Pool.new(enemy_bullet_scene),
 		"enemy_basic" : Pool.new(enemy_basic_scene),
 		"enemy_flanker" : Pool.new(enemy_flanker_scene),
 		"enemy_miniboss" : Pool.new(enemy_miniboss_scene),

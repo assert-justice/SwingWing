@@ -12,6 +12,8 @@ func _ready():
 	set_mode(0)
 
 func _physics_process(delta):
+	if Input.is_key_pressed(KEY_ESCAPE):
+		get_tree().quit()
 	controller.update(delta)
 	velocity = controller.move * speed * delta
 	$Emitter.enabled = controller.fire_button > 0

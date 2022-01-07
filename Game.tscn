@@ -1,14 +1,20 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://entities/Bullet.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/PoolSystem.gd" type="Script" id=2]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://entities/Enemy.tscn" type="PackedScene" id=4]
+[ext_resource path="res://entities/EnemyBullet.tscn" type="PackedScene" id=5]
 
 [node name="Game" type="Node2D" groups=["Game"]]
 
 [node name="PoolSystem" type="Node" parent="." groups=["PoolSystem"]]
 script = ExtResource( 2 )
 bullet_scene = ExtResource( 1 )
+enemy_bullet_scene = ExtResource( 5 )
+enemy_basic_scene = ExtResource( 4 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 244, 123 )
+
+[node name="Enemy" parent="." instance=ExtResource( 4 )]
