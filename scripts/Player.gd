@@ -47,5 +47,5 @@ func spin():
 func set_mode(mode):
 	self.mode = mode
 	$AnimationPlayer.play(str(mode))
-	$AnimatedSprite/Area2D.collision_layer = pow(2, mode)
+	$AnimatedSprite/Area2D.collision_layer = 15 - pow(2, mode)
 	$Emitter.mode = mode
