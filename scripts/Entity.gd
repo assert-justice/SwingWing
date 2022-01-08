@@ -9,9 +9,11 @@ export (Vector2) var velocity
 export var health = 1.0
 
 func damage(dam):
+	if not awake:
+		return
 	health -= dam
-	#if health <= 0:
-		#sleep()
+	if health <= 0:
+		sleep()
 
 func set_pool(pool):
 	self.pool = pool
@@ -19,10 +21,10 @@ func set_pool(pool):
 func wake():
 	visible = true
 	awake = true
+	$AnimatedSprite/Area2D/CollisionShape2D.disabled = false
 
 func sleep():
 	#visible = false
-	#$AnimatedSprited/Area2D/CollisionShape2D.disabled = true
 	$AnimatedSprite/Area2D/CollisionShape2D.disabled = true
 	pool.sleep(self)
 	awake = false

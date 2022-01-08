@@ -22,6 +22,7 @@ func _ready():
 	}
 	for pool in pools:
 		add_child(pools[pool])
+	#pools["enemy_bullet"].debug = true
 
 func get_pool(pool_name):
 	return pools[pool_name]

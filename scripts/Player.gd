@@ -1,13 +1,13 @@
 extends Entity
 
 export var speed = 200
-export var speed_co = 1.0
+export var speed_co = 0.75
 export var mode = 0
 
 var controller : Controller
 
 func damage(dam):
-	.damage(dam)
+	#.damage(dam)
 	print("player damaged")
 
 func _ready():
@@ -47,4 +47,5 @@ func spin():
 func set_mode(mode):
 	self.mode = mode
 	$AnimationPlayer.play(str(mode))
-	
+	$AnimatedSprite/Area2D.collision_layer = pow(2, mode)
+	$Emitter.mode = mode

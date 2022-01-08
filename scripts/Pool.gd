@@ -6,6 +6,7 @@ var scene : PackedScene
 
 var active : Array
 var inactive : Array
+export var debug = false
 
 func _init(scene):
 	self.scene = scene
@@ -27,8 +28,11 @@ func get_entity():
 		ent.set_pool(self)
 	active.push_back(ent)
 	ent.wake()
+	if debug:
+		print(len(active), " ", len(inactive))
 	return ent
 
 func sleep(ent):
-	active.erase(ent)
-	inactive.push_back(ent)
+	if ent in active:
+		active.erase(ent)
+		inactive.push_back(ent)
