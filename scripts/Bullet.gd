@@ -2,7 +2,7 @@ extends Entity
 
 class_name Bullet
 
-export var damage = 1
+export var damage = 1.0
 
 # export var team = 0 infer from collision layer
 # if collision layer == 256 it's a player bullet
@@ -21,11 +21,12 @@ func _physics_process(delta):
 	._physics_process(delta)
 	if position.x < 0 or position.x > 480 or position.y < 0 or position.y > 270:
 		sleep()
+	$AnimatedSprite.rotation = velocity.angle_to(Vector2.LEFT)
 
 
 func _on_Area2D_area_entered(area):
 	if awake:
-		area.get_parent().get_parent().damage(damage)
+		area.get_parent().get_parent().damage(damage, origin)
 		sleep()
 
 func set_mode(mode):

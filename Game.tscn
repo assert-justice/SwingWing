@@ -1,31 +1,79 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://entities/Bullet.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/PoolSystem.gd" type="Script" id=2]
-[ext_resource path="res://Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scripts/Director.gd" type="Script" id=3]
 [ext_resource path="res://entities/Enemy.tscn" type="PackedScene" id=4]
 [ext_resource path="res://entities/EnemyBullet.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Emitter.tscn" type="PackedScene" id=6]
+[ext_resource path="res://music/SHMUP-final-draft-1.mp3" type="AudioStream" id=7]
+[ext_resource path="res://entities/EnemyFlanker.tscn" type="PackedScene" id=8]
 
 [node name="Game" type="Node2D" groups=["Game"]]
+script = ExtResource( 3 )
 
 [node name="PoolSystem" type="Node" parent="." groups=["PoolSystem"]]
 script = ExtResource( 2 )
 bullet_scene = ExtResource( 1 )
 enemy_bullet_scene = ExtResource( 5 )
 enemy_basic_scene = ExtResource( 4 )
+enemy_flanker_scene = ExtResource( 8 )
 
-[node name="Player" parent="." instance=ExtResource( 3 )]
-position = Vector2( 244, 123 )
-
-[node name="Emitter" parent="." instance=ExtResource( 6 )]
+[node name="RedEmitter" parent="." instance=ExtResource( 6 )]
 pool_name = "enemy_basic"
+fire_time = 3.0
 direction = Vector2( 0, 1 )
 speed = 10
 
-[node name="Emitter2" parent="." instance=ExtResource( 6 )]
+[node name="BlueEmitter" parent="." instance=ExtResource( 6 )]
+position = Vector2( 233, 0 )
 pool_name = "enemy_basic"
-fire_delay = 0.5
+fire_time = 3.0
+fire_delay = 1.5
 direction = Vector2( 0, 1 )
 speed = 10
 mode = 1
+
+[node name="GreenEmitter" parent="." instance=ExtResource( 6 )]
+pool_name = "enemy_basic"
+fire_time = 3.0
+fire_delay = 0.75
+direction = Vector2( 0, 1 )
+speed = 10
+mode = 2
+player_flag = 2
+
+[node name="PurpleEmitter" parent="." instance=ExtResource( 6 )]
+position = Vector2( 233, 0 )
+pool_name = "enemy_basic"
+fire_time = 3.0
+fire_delay = 2.25
+direction = Vector2( 0, 1 )
+speed = 10
+mode = 3
+player_flag = 2
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+autoplay = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Display0" type="RichTextLabel" parent="CanvasLayer" groups=["Display0"]]
+margin_right = 124.0
+margin_bottom = 61.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Display2" type="RichTextLabel" parent="CanvasLayer" groups=["Display2"]]
+margin_left = 405.0
+margin_right = 529.0
+margin_bottom = 61.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

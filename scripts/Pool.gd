@@ -7,6 +7,7 @@ var scene : PackedScene
 var active : Array
 var inactive : Array
 export var debug = false
+export var max_size = -1
 
 func _init(scene):
 	self.scene = scene
@@ -23,6 +24,10 @@ func get_entity():
 	var ent : Entity
 	if len(inactive) > 0:
 		ent = inactive.pop_back()
+	elif max_size != -1 and len(active) >= max_size:
+		# reuse oldest?
+		#ent = active.pop_front()
+		return null
 	else:
 		ent = new_ent()
 		ent.set_pool(self)

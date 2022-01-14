@@ -49,11 +49,12 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 2, 4 ),
 "transitions": PoolRealArray( -2, -2, 1 ),
 "update": 0,
-"values": [ Vector2( 30, -15 ), Vector2( 422, -15 ), Vector2( 30, -15 ) ]
+"values": [ Vector2( 30, -15 ), Vector2( 200, -15 ), Vector2( 30, -15 ) ]
 }
 
 [node name="Enemy" type="Node2D"]
 script = ExtResource( 2 )
+points = 10
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 30, -15 )
@@ -74,6 +75,7 @@ __meta__ = {
 
 [node name="Emitter" parent="AnimatedSprite" instance=ExtResource( 3 )]
 pool_name = "enemy_bullet"
+enabled = false
 direction = Vector2( 0, 1 )
 speed = 100
 

@@ -1,7 +1,173 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Game.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/Main.gd" type="Script" id=2]
+[ext_resource path="res://Player.tscn" type="PackedScene" id=3]
 
 [node name="Main" type="Node2D"]
+script = ExtResource( 2 )
+game_scene = ExtResource( 1 )
+player_scene = ExtResource( 3 )
 
-[node name="Game" parent="." instance=ExtResource( 1 )]
+[node name="Menu" type="CanvasLayer" parent="."]
+
+[node name="Main" type="VBoxContainer" parent="Menu"]
+margin_left = 167.0
+margin_top = 31.0
+margin_right = 326.0
+margin_bottom = 223.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Menu/Main"]
+margin_right = 159.0
+margin_bottom = 15.0
+text = "			Swing Wing"
+fit_content_height = true
+
+[node name="Launch" type="Button" parent="Menu/Main"]
+margin_top = 19.0
+margin_right = 159.0
+margin_bottom = 39.0
+text = "Launch"
+
+[node name="Quit" type="Button" parent="Menu/Main"]
+margin_top = 43.0
+margin_right = 159.0
+margin_bottom = 63.0
+text = "Quit"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Menu/Main"]
+margin_top = 67.0
+margin_right = 159.0
+margin_bottom = 82.0
+text = "Game Speed"
+fit_content_height = true
+
+[node name="GameSpeed" type="OptionButton" parent="Menu/Main"]
+margin_top = 86.0
+margin_right = 159.0
+margin_bottom = 106.0
+text = "Game Speed"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel5" type="RichTextLabel" parent="Menu/Main"]
+margin_top = 110.0
+margin_right = 159.0
+margin_bottom = 125.0
+text = "Starting Credits"
+fit_content_height = true
+
+[node name="Credits" type="OptionButton" parent="Menu/Main"]
+margin_top = 129.0
+margin_right = 159.0
+margin_bottom = 149.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="Menu/Main"]
+margin_top = 153.0
+margin_right = 159.0
+margin_bottom = 168.0
+text = "Player 1 Controls"
+fit_content_height = true
+
+[node name="P1Controls" type="OptionButton" parent="Menu/Main"]
+margin_top = 172.0
+margin_right = 159.0
+margin_bottom = 192.0
+text = "Player 1 Controls"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="Menu/Main"]
+margin_top = 196.0
+margin_right = 159.0
+margin_bottom = 211.0
+text = "Player 2 Controls"
+fit_content_height = true
+
+[node name="P2Controls" type="OptionButton" parent="Menu/Main"]
+margin_top = 215.0
+margin_right = 159.0
+margin_bottom = 235.0
+text = "Player 2 Controls"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameOver" type="VBoxContainer" parent="Menu"]
+visible = false
+margin_left = 167.0
+margin_top = 31.0
+margin_right = 326.0
+margin_bottom = 194.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Menu/GameOver"]
+margin_right = 159.0
+margin_bottom = 30.0
+text = "			Game Over
+Score: "
+fit_content_height = true
+
+[node name="Main" type="Button" parent="Menu/GameOver"]
+margin_top = 58.0
+margin_right = 159.0
+margin_bottom = 78.0
+text = "Main Menu"
+
+[node name="Quit" type="Button" parent="Menu/GameOver"]
+margin_top = 82.0
+margin_right = 159.0
+margin_bottom = 102.0
+text = "Quit"
+
+[node name="Pause" type="VBoxContainer" parent="Menu"]
+visible = false
+margin_left = 167.0
+margin_top = 31.0
+margin_right = 326.0
+margin_bottom = 194.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Menu/Pause"]
+margin_right = 159.0
+margin_bottom = 15.0
+text = "			  Paused"
+fit_content_height = true
+
+[node name="Resume" type="Button" parent="Menu/Pause"]
+margin_top = 19.0
+margin_right = 159.0
+margin_bottom = 39.0
+text = "Resume"
+
+[node name="Main" type="Button" parent="Menu/Pause"]
+margin_top = 43.0
+margin_right = 159.0
+margin_bottom = 63.0
+text = "Main Menu"
+
+[node name="Quit" type="Button" parent="Menu/Pause"]
+margin_top = 67.0
+margin_right = 159.0
+margin_bottom = 87.0
+text = "Quit"
+
+[connection signal="button_up" from="Menu/Main/Launch" to="." method="_on_Launch_button_up"]
+[connection signal="button_up" from="Menu/Main/Quit" to="." method="_on_Quit_button_up"]
+[connection signal="button_up" from="Menu/GameOver/Main" to="." method="_on_Main_button_up"]
+[connection signal="button_up" from="Menu/GameOver/Quit" to="." method="_on_Quit_button_up"]
+[connection signal="button_up" from="Menu/Pause/Resume" to="." method="_on_Resume_button_up"]
+[connection signal="button_up" from="Menu/Pause/Main" to="." method="_on_Main_button_up"]
+[connection signal="button_up" from="Menu/Pause/Quit" to="." method="_on_Quit_button_up"]

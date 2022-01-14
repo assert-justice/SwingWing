@@ -1,22 +1,96 @@
 extends Entity
 
+class_name Player
+
 export var speed = 200
 export var speed_co = 0.75
 export var mode = 0
+export var lives = 2
+export var invuln_time = 1.0
+export var invuln_clock = 0.0
+onready var display = get_tree().get_nodes_in_group("Display" + str(mode))[0]
+var frame = 1
+var chain_length = 0
+var score = 0
+export var chain_time = 1.0
+var chain_clock = 0.0
+export var credits = 0
+onready var spawn_point = position
+var root = null
 
 var controller : Controller
 
-func damage(dam):
-	#.damage(dam)
-	print("player damaged")
+func register(points):
+	if points > 0:
+		chain_length += 1
+	score += chain_length * points
+	display_update()
+	chain_clock = chain_time
+
+func set_start_position(pos : Vector2):
+	position = pos
+	spawn_point = position
+
+func die():
+	visible = false
+	awake = false
+	$Emitter.enabled = false
+	display_update()
+	root.player_death()
+
+func damage(dam, origin = null):
+	if invuln_clock > 0:
+		return
+	chain_length = 0
+	invuln_clock = invuln_time
+	lives -= 1
+	if lives > -1:
+		display_update()
+		return
+	die()
+
+func ressurect():
+	position = spawn_point
+	$AnimationPlayer.play("enter")
+	lives = 2
+	visible = true
+	awake = true
+	invuln_clock = invuln_time
+	display_update()
+
+func display_update():
+	display.text = "Lives: " + str(lives) + "\nCredits: " + str(credits) + "\nScore: " + str(score) + " x" + str(chain_length)
+
+func set_controller(type):
+	controller = Controller.new(type)
 
 func _ready():
-	controller = Controller.new("mk")
-	set_mode(0)
+	#controller = Controller.new("mk")
+	set_mode(mode)
+	display_update()
+	$AnimationPlayer.play("enter")
+	$Emitter.set_origin(self)
+	root = get_tree().root.get_child(0)
+	#Engine.time_scale = 0.3
 
 func _physics_process(delta):
-	if Input.is_key_pressed(KEY_ESCAPE):
-		get_tree().quit()
+	if not awake:
+		return
+	var game_credits = root.credits
+	if credits != game_credits:
+		credits = game_credits
+		display_update()
+	frame += 1
+	if invuln_clock > 0:
+		visible = frame % 6 < 3
+		invuln_clock -= delta
+	else:
+		visible = true
+	if chain_clock > 0:
+		chain_clock -= delta
+	else:
+		chain_length = 0
+		display_update()
 	controller.update(delta)
 	velocity = controller.move * speed * delta
 	$Emitter.enabled = controller.fire_button > 0
@@ -44,8 +118,11 @@ func spin():
 	else:
 		set_mode(2)
 
-func set_mode(mode):
+func set_mode(mode, quick = false):
 	self.mode = mode
-	$AnimationPlayer.play(str(mode))
+	if quick:
+		$AnimatedSprite.frame = mode
+	else:
+		$AnimationPlayer.play(str(mode))
 	$AnimatedSprite/Area2D.collision_layer = 15 - pow(2, mode)
 	$Emitter.mode = mode

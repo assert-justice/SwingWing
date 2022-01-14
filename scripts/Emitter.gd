@@ -10,13 +10,35 @@ export (Vector2) var direction = Vector2.RIGHT
 export var speed = 400
 export var once = false
 export var mode = 0
+export var player_flag = -1 # 0: any, 1: 1 player, 2: 2 player
+#export var relative = false
+var origin = null
+var root = null
 
 var pool : Pool
 
-func _ready():
+func set_pool(pool_name):
+	self.pool_name = pool_name
 	var pool_system : PoolSystem = get_tree().get_nodes_in_group("PoolSystem")[0]
 	pool = pool_system.get_pool(pool_name)
+
+func enable():
+	if player_flag == -1 or player_flag == root.player_count:
+		enabled = true
+	else:
+		enabled = false
+
+func _ready():
+	set_pool(pool_name)
+	root = get_tree().root.get_child(0)
+	if player_flag == -1 or player_flag == root.player_count:
+		pass
+	else:
+		enabled = false
 	wake()
+
+func set_origin(origin):
+	self.origin = origin
 
 func wake():
 	fire_clock = fire_delay
@@ -34,8 +56,13 @@ func _physics_process(delta):
 
 func fire():
 	var ent : Entity = pool.get_entity()
+	if not ent:
+		return
 	ent.position = global_position
 	ent.rotation = global_rotation
-	ent.velocity = direction.normalized() * speed
+	var facing = direction.rotated(global_rotation)
+	ent.velocity = facing.normalized() * speed
+	ent.set_origin(origin)
 	if ent.has_method("set_mode"):
 		ent.set_mode(mode)
+	return ent
