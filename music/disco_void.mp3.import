@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/disco_void.mp3-4c09df5339453d13a549621b4de0190a.mp3str"
+
+[deps]
+
+source_file="res://music/disco_void.mp3"
+dest_files=[ "res://.import/disco_void.mp3-4c09df5339453d13a549621b4de0190a.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

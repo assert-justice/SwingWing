@@ -11,6 +11,7 @@ export var invuln_clock = 0.0
 onready var display = get_tree().get_nodes_in_group("Display" + str(mode))[0]
 var frame = 1
 var chain_length = 0
+var best_chain = 0
 var score = 0
 export var chain_time = 1.0
 var chain_clock = 0.0
@@ -23,6 +24,8 @@ var controller : Controller
 func register(points):
 	if points > 0:
 		chain_length += 1
+		if chain_length > best_chain:
+			best_chain = chain_length
 	score += chain_length * points
 	display_update()
 	chain_clock = chain_time
@@ -32,6 +35,7 @@ func set_start_position(pos : Vector2):
 	spawn_point = position
 
 func die():
+	lives = 0
 	visible = false
 	awake = false
 	$Emitter.enabled = false
@@ -39,6 +43,10 @@ func die():
 	root.player_death()
 
 func damage(dam, origin = null):
+	if not awake:
+		return
+	$DieSfx.play()
+	$DieVfx.emitting = true
 	if invuln_clock > 0:
 		return
 	chain_length = 0
@@ -52,7 +60,7 @@ func damage(dam, origin = null):
 func ressurect():
 	position = spawn_point
 	$AnimationPlayer.play("enter")
-	lives = 2
+	lives = root.lives
 	visible = true
 	awake = true
 	invuln_clock = invuln_time
@@ -95,6 +103,8 @@ func _physics_process(delta):
 	velocity = controller.move * speed * delta
 	$Emitter.enabled = controller.fire_button > 0
 	if $Emitter.enabled:
+		if not $ShootSfx.playing:
+			$ShootSfx.play()
 		velocity *= speed_co
 	if controller.spin_button > 0:
 		spin()
@@ -120,6 +130,8 @@ func spin():
 
 func set_mode(mode, quick = false):
 	self.mode = mode
+	var colors = [Color(1, 0, 0), Color(0, 0, 1), Color(0, 1, 0), Color(0.8, 0, 1)]
+	$DieVfx.color = colors[mode]
 	if quick:
 		$AnimatedSprite.frame = mode
 	else:

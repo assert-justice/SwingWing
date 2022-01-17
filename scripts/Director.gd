@@ -3,6 +3,7 @@ extends Node2D
 var index = -1
 
 var interps = []
+var audio_player: AudioStreamPlayer = null
 
 func _ready():
 	inc()
@@ -10,6 +11,13 @@ func _ready():
 func _process(delta):
 	for interp in interps:
 		interp[0].position = lerp(interp[1], interp[2], 1.0 - $Timer.time_left / $Timer.wait_time)
+	if not audio_player:
+		var aplayers = get_tree().get_nodes_in_group("Music")
+		for ap in aplayers:
+			if ap.playing:
+				audio_player = ap
+	if not audio_player.playing:
+		 audio_player.play()
 
 func inc():
 	index += 1
@@ -55,6 +63,12 @@ func inc():
 			var type = floor(randf() * 2)
 			if type == 0:
 				em.set_pool("enemy_basic")
+				var switch = randf() < 0.5
+				if switch:
+					if em.position.x < 100:
+						interps.append([em, Vector2(em.position), Vector2(233, 0)])
+					else:
+						interps.append([em, Vector2(em.position), Vector2(0, 0)])
 			else:
 				em.set_pool("enemy_flanker")
 		$Timer.wait_time = randf() * 20 + 10

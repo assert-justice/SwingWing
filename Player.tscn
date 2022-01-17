@@ -1,8 +1,10 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://sprites/PlayerSprites.png" type="Texture" id=1]
 [ext_resource path="res://scripts/Player.gd" type="Script" id=2]
 [ext_resource path="res://Emitter.tscn" type="PackedScene" id=3]
+[ext_resource path="res://sfx/Pew/Pew__001.wav" type="AudioStream" id=4]
+[ext_resource path="res://sfx/Explosion/Explosion2__001.wav" type="AudioStream" id=5]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
@@ -214,3 +216,21 @@ anims/1 = SubResource( 8 )
 anims/2 = SubResource( 10 )
 anims/3 = SubResource( 11 )
 anims/enter = SubResource( 9 )
+
+[node name="ShootSfx" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+
+[node name="DieSfx" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
+
+[node name="DieVfx" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 200
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.81
+lifetime_randomness = 1.0
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 125.0
+color = Color( 0.827451, 0.00392157, 1, 1 )

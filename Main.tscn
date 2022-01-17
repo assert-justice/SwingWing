@@ -12,6 +12,7 @@ player_scene = ExtResource( 3 )
 [node name="Menu" type="CanvasLayer" parent="."]
 
 [node name="Main" type="VBoxContainer" parent="Menu"]
+visible = false
 margin_left = 167.0
 margin_top = 31.0
 margin_right = 326.0
@@ -38,71 +39,133 @@ margin_right = 159.0
 margin_bottom = 63.0
 text = "Quit"
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="Menu/Main"]
+[node name="RichTextLabel3" type="RichTextLabel" parent="Menu/Main"]
 margin_top = 67.0
 margin_right = 159.0
 margin_bottom = 82.0
-text = "Game Speed"
-fit_content_height = true
-
-[node name="GameSpeed" type="OptionButton" parent="Menu/Main"]
-margin_top = 86.0
-margin_right = 159.0
-margin_bottom = 106.0
-text = "Game Speed"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="RichTextLabel5" type="RichTextLabel" parent="Menu/Main"]
-margin_top = 110.0
-margin_right = 159.0
-margin_bottom = 125.0
-text = "Starting Credits"
-fit_content_height = true
-
-[node name="Credits" type="OptionButton" parent="Menu/Main"]
-margin_top = 129.0
-margin_right = 159.0
-margin_bottom = 149.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="RichTextLabel3" type="RichTextLabel" parent="Menu/Main"]
-margin_top = 153.0
-margin_right = 159.0
-margin_bottom = 168.0
 text = "Player 1 Controls"
 fit_content_height = true
 
 [node name="P1Controls" type="OptionButton" parent="Menu/Main"]
-margin_top = 172.0
+margin_top = 86.0
 margin_right = 159.0
-margin_bottom = 192.0
+margin_bottom = 106.0
 text = "Player 1 Controls"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="RichTextLabel4" type="RichTextLabel" parent="Menu/Main"]
-margin_top = 196.0
+margin_top = 110.0
 margin_right = 159.0
-margin_bottom = 211.0
+margin_bottom = 125.0
 text = "Player 2 Controls"
 fit_content_height = true
 
 [node name="P2Controls" type="OptionButton" parent="Menu/Main"]
-margin_top = 215.0
+margin_top = 129.0
 margin_right = 159.0
-margin_bottom = 235.0
+margin_bottom = 149.0
 text = "Player 2 Controls"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GameOver" type="VBoxContainer" parent="Menu"]
+[node name="RichTextLabel5" type="RichTextLabel" parent="Menu/Main"]
+margin_top = 153.0
+margin_right = 159.0
+margin_bottom = 168.0
+text = "Jams"
+fit_content_height = true
+
+[node name="Jams" type="OptionButton" parent="Menu/Main"]
+margin_top = 172.0
+margin_right = 159.0
+margin_bottom = 192.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Difficulty" type="Button" parent="Menu/Main"]
+margin_top = 196.0
+margin_right = 159.0
+margin_bottom = 216.0
+text = "Difficulty Options"
+
+[node name="Difficulty" type="VBoxContainer" parent="Menu"]
 visible = false
+margin_left = 167.0
+margin_top = 31.0
+margin_right = 326.0
+margin_bottom = 223.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel6" type="RichTextLabel" parent="Menu/Difficulty"]
+margin_right = 159.0
+margin_bottom = 15.0
+text = "Difficulty Options"
+fit_content_height = true
+
+[node name="Main" type="Button" parent="Menu/Difficulty"]
+margin_top = 19.0
+margin_right = 159.0
+margin_bottom = 39.0
+text = "Back"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Menu/Difficulty"]
+margin_top = 43.0
+margin_right = 159.0
+margin_bottom = 58.0
+text = "Game Speed"
+fit_content_height = true
+
+[node name="GameSpeed" type="OptionButton" parent="Menu/Difficulty"]
+margin_top = 62.0
+margin_right = 159.0
+margin_bottom = 82.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel5" type="RichTextLabel" parent="Menu/Difficulty"]
+margin_top = 86.0
+margin_right = 159.0
+margin_bottom = 101.0
+text = "Starting Credits"
+fit_content_height = true
+
+[node name="Credits" type="OptionButton" parent="Menu/Difficulty"]
+margin_top = 105.0
+margin_right = 159.0
+margin_bottom = 125.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="Menu/Difficulty"]
+margin_top = 129.0
+margin_right = 159.0
+margin_bottom = 144.0
+text = "Starting Lives"
+fit_content_height = true
+
+[node name="Lives" type="OptionButton" parent="Menu/Difficulty"]
+margin_top = 148.0
+margin_right = 159.0
+margin_bottom = 168.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Reset Scores" type="Button" parent="Menu/Difficulty"]
+margin_top = 19.0
+margin_right = 159.0
+margin_bottom = 39.0
+text = "Reset Scores"
+
+[node name="GameOver" type="VBoxContainer" parent="Menu"]
 margin_left = 167.0
 margin_top = 31.0
 margin_right = 326.0
@@ -113,21 +176,25 @@ __meta__ = {
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Menu/GameOver"]
 margin_right = 159.0
-margin_bottom = 30.0
+margin_bottom = 90.0
 text = "			Game Over
-Score: "
+P1 Score: 1000
+New Best!
+P1 Best Combo: x6
+New Best!
+P2 Score: 1000"
 fit_content_height = true
 
 [node name="Main" type="Button" parent="Menu/GameOver"]
-margin_top = 58.0
+margin_top = 94.0
 margin_right = 159.0
-margin_bottom = 78.0
+margin_bottom = 114.0
 text = "Main Menu"
 
 [node name="Quit" type="Button" parent="Menu/GameOver"]
-margin_top = 82.0
+margin_top = 118.0
 margin_right = 159.0
-margin_bottom = 102.0
+margin_bottom = 138.0
 text = "Quit"
 
 [node name="Pause" type="VBoxContainer" parent="Menu"]
@@ -166,6 +233,9 @@ text = "Quit"
 
 [connection signal="button_up" from="Menu/Main/Launch" to="." method="_on_Launch_button_up"]
 [connection signal="button_up" from="Menu/Main/Quit" to="." method="_on_Quit_button_up"]
+[connection signal="button_up" from="Menu/Main/Difficulty" to="." method="_on_Difficulty_button_up"]
+[connection signal="button_up" from="Menu/Difficulty/Main" to="." method="_on_Main_button_up"]
+[connection signal="button_up" from="Menu/Difficulty/Reset Scores" to="." method="_on_Reset_Scores_button_up"]
 [connection signal="button_up" from="Menu/GameOver/Main" to="." method="_on_Main_button_up"]
 [connection signal="button_up" from="Menu/GameOver/Quit" to="." method="_on_Quit_button_up"]
 [connection signal="button_up" from="Menu/Pause/Resume" to="." method="_on_Resume_button_up"]
