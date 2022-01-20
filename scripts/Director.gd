@@ -16,7 +16,7 @@ func _process(delta):
 		for ap in aplayers:
 			if ap.playing:
 				audio_player = ap
-	if not audio_player.playing:
+	if audio_player and not audio_player.playing:
 		 audio_player.play()
 
 func inc():
