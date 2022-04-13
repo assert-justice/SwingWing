@@ -1,0 +1,113 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://scripts/EnemyBase.gd" type="Script" id=1]
+[ext_resource path="res://scripts/Shield.gd" type="Script" id=2]
+[ext_resource path="res://sprites/Enemy.png" type="Texture" id=3]
+[ext_resource path="res://Emitter.tscn" type="PackedScene" id=4]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 16.0312
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=6]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 96, 0, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=7]
+animations = [ {
+"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 32.0
+
+[node name="EnemyBase" type="Node2D"]
+script = ExtResource( 1 )
+health = 10.0
+
+[node name="PathTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="FacingTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Body" type="Node2D" parent="."]
+
+[node name="Hull" type="Area2D" parent="Body"]
+collision_layer = 240
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Hull"]
+shape = SubResource( 1 )
+
+[node name="Emitters" type="Node2D" parent="Body"]
+
+[node name="Emitter" parent="Body/Emitters" instance=ExtResource( 4 )]
+pool_name = "enemy_bullet"
+direction = Vector2( 0, 1 )
+speed = 150
+
+[node name="Emitter2" parent="Body/Emitters" instance=ExtResource( 4 )]
+pool_name = "enemy_bullet"
+direction = Vector2( 0.3, 1 )
+speed = 150
+
+[node name="Emitter3" parent="Body/Emitters" instance=ExtResource( 4 )]
+pool_name = "enemy_bullet"
+direction = Vector2( -0.3, 1 )
+speed = 150
+
+[node name="DieParticle" type="CPUParticles2D" parent="Body"]
+emitting = false
+amount = 400
+lifetime = 0.5
+one_shot = true
+preprocess = 1.0
+explosiveness = 1.0
+lifetime_randomness = 0.68
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 137.62
+initial_velocity_random = 0.66
+
+[node name="DamageParticle" type="CPUParticles2D" parent="Body"]
+emitting = false
+amount = 100
+lifetime = 0.5
+lifetime_randomness = 0.57
+local_coords = false
+direction = Vector2( 0, -1 )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 200.0
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Body"]
+frames = SubResource( 7 )
+
+[node name="Shield" type="Area2D" parent="Body/AnimatedSprite"]
+collision_layer = 224
+collision_mask = 0
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/AnimatedSprite/Shield"]
+shape = SubResource( 2 )
+
+[connection signal="timeout" from="PathTimer" to="." method="_on_PathTimer_timeout"]

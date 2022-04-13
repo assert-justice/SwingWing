@@ -2,7 +2,7 @@ extends Node2D
 
 class_name Entity
 
-var pool
+var pool = null
 var awake = true
 var origin = null
 export var points = 0
@@ -36,7 +36,8 @@ func wake():
 func sleep():
 	visible = false
 	#$AnimatedSprite/Area2D/CollisionShape2D.disabled = true
-	pool.sleep(self)
+	if pool:
+		pool.sleep(self)
 	awake = false
 	translate(Vector2.LEFT * 1000)
 

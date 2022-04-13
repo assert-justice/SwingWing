@@ -26,7 +26,9 @@ func _physics_process(delta):
 
 func _on_Area2D_area_entered(area):
 	if awake:
-		area.get_parent().get_parent().damage(damage, origin)
+		var target = area.get_parent().get_parent()
+		if target.has_method("damage"):
+			target.damage(damage, origin)
 		sleep()
 
 func set_mode(mode):
@@ -35,3 +37,5 @@ func set_mode(mode):
 	if $AnimatedSprite/Area2D.collision_layer == 512:
 		# if enemy set mask
 		$AnimatedSprite/Area2D.collision_mask = pow(2, mode)
+	else:
+		$AnimatedSprite/Area2D.collision_mask = pow(2, mode + 4)

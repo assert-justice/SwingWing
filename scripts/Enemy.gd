@@ -1,6 +1,6 @@
 extends Entity
 
-var mode
+var mode = 0
 var dam
 var hit = false
 var hit_origin

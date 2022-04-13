@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Game.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/Main.gd" type="Script" id=2]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scripts/NetworkManager.gd" type="Script" id=4]
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 2 )
@@ -14,9 +15,9 @@ player_scene = ExtResource( 3 )
 [node name="Main" type="VBoxContainer" parent="Menu"]
 visible = false
 margin_left = 167.0
-margin_top = 31.0
+margin_top = 22.0
 margin_right = 326.0
-margin_bottom = 223.0
+margin_bottom = 271.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -33,11 +34,11 @@ margin_right = 159.0
 margin_bottom = 39.0
 text = "Launch"
 
-[node name="Quit" type="Button" parent="Menu/Main"]
+[node name="Leaderboard" type="Button" parent="Menu/Main"]
 margin_top = 43.0
 margin_right = 159.0
 margin_bottom = 63.0
-text = "Quit"
+text = "Leaderboard"
 
 [node name="RichTextLabel3" type="RichTextLabel" parent="Menu/Main"]
 margin_top = 67.0
@@ -91,6 +92,12 @@ margin_top = 196.0
 margin_right = 159.0
 margin_bottom = 216.0
 text = "Difficulty Options"
+
+[node name="Quit" type="Button" parent="Menu/Main"]
+margin_top = 220.0
+margin_right = 159.0
+margin_bottom = 240.0
+text = "Quit"
 
 [node name="Difficulty" type="VBoxContainer" parent="Menu"]
 visible = false
@@ -167,34 +174,137 @@ text = "Reset Scores"
 
 [node name="GameOver" type="VBoxContainer" parent="Menu"]
 margin_left = 167.0
-margin_top = 31.0
+margin_top = 9.0
 margin_right = 326.0
-margin_bottom = 194.0
+margin_bottom = 265.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Menu/GameOver"]
+[node name="Title" type="RichTextLabel" parent="Menu/GameOver"]
 margin_right = 159.0
-margin_bottom = 90.0
-text = "			Game Over
-P1 Score: 1000
-New Best!
-P1 Best Combo: x6
-New Best!
-P2 Score: 1000"
+margin_bottom = 15.0
+text = "			Game Over"
 fit_content_height = true
 
-[node name="Main" type="Button" parent="Menu/GameOver"]
-margin_top = 94.0
+[node name="Summary" type="VBoxContainer" parent="Menu/GameOver"]
+margin_top = 19.0
+margin_right = 159.0
+margin_bottom = 19.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Leaderboard" type="VBoxContainer" parent="Menu/GameOver"]
+margin_top = 23.0
 margin_right = 159.0
 margin_bottom = 114.0
+
+[node name="Entry" type="RichTextLabel" parent="Menu/GameOver/Leaderboard"]
+margin_right = 159.0
+margin_bottom = 15.0
+text = "  #1 ASS 1000"
+fit_content_height = true
+
+[node name="Entry2" type="RichTextLabel" parent="Menu/GameOver/Leaderboard"]
+margin_top = 19.0
+margin_right = 159.0
+margin_bottom = 34.0
+bbcode_text = "#1 ASS 1000"
+text = "#1 ASS 1000"
+fit_content_height = true
+
+[node name="Entry3" type="RichTextLabel" parent="Menu/GameOver/Leaderboard"]
+margin_top = 38.0
+margin_right = 159.0
+margin_bottom = 53.0
+text = "  #1 ASS 1000"
+fit_content_height = true
+
+[node name="Entry4" type="RichTextLabel" parent="Menu/GameOver/Leaderboard"]
+margin_top = 57.0
+margin_right = 159.0
+margin_bottom = 72.0
+text = "  #1 ASS 1000"
+fit_content_height = true
+
+[node name="Entry5" type="RichTextLabel" parent="Menu/GameOver/Leaderboard"]
+margin_top = 76.0
+margin_right = 159.0
+margin_bottom = 91.0
+text = "  #1 ASS 1000"
+fit_content_height = true
+
+[node name="Buttons" type="VBoxContainer" parent="Menu/GameOver"]
+margin_top = 118.0
+margin_right = 159.0
+margin_bottom = 162.0
+alignment = 1
+
+[node name="Top" type="HBoxContainer" parent="Menu/GameOver/Buttons"]
+margin_right = 159.0
+margin_bottom = 20.0
+alignment = 1
+
+[node name="tb1" type="Button" parent="Menu/GameOver/Buttons/Top"]
+margin_left = 47.0
+margin_right = 66.0
+margin_bottom = 20.0
+text = "^"
+
+[node name="tb2" type="Button" parent="Menu/GameOver/Buttons/Top"]
+margin_left = 70.0
+margin_right = 89.0
+margin_bottom = 20.0
+text = "^"
+
+[node name="tb3" type="Button" parent="Menu/GameOver/Buttons/Top"]
+margin_left = 93.0
+margin_right = 112.0
+margin_bottom = 20.0
+text = "^"
+
+[node name="Bottom" type="HBoxContainer" parent="Menu/GameOver/Buttons"]
+margin_top = 24.0
+margin_right = 159.0
+margin_bottom = 44.0
+alignment = 1
+
+[node name="bb1" type="Button" parent="Menu/GameOver/Buttons/Bottom"]
+margin_left = 47.0
+margin_right = 66.0
+margin_bottom = 20.0
+text = "v"
+
+[node name="bb2" type="Button" parent="Menu/GameOver/Buttons/Bottom"]
+margin_left = 70.0
+margin_right = 89.0
+margin_bottom = 20.0
+text = "v"
+
+[node name="bb3" type="Button" parent="Menu/GameOver/Buttons/Bottom"]
+margin_left = 93.0
+margin_right = 112.0
+margin_bottom = 20.0
+text = "v"
+
+[node name="Submit" type="Button" parent="Menu/GameOver"]
+margin_top = 166.0
+margin_right = 159.0
+margin_bottom = 186.0
+disabled = true
+text = "Submit"
+
+[node name="Main" type="Button" parent="Menu/GameOver"]
+margin_top = 190.0
+margin_right = 159.0
+margin_bottom = 210.0
 text = "Main Menu"
 
 [node name="Quit" type="Button" parent="Menu/GameOver"]
-margin_top = 118.0
+margin_top = 214.0
 margin_right = 159.0
-margin_bottom = 138.0
+margin_bottom = 234.0
 text = "Quit"
 
 [node name="Pause" type="VBoxContainer" parent="Menu"]
@@ -231,13 +341,72 @@ margin_right = 159.0
 margin_bottom = 87.0
 text = "Quit"
 
+[node name="Leaderboard" type="VBoxContainer" parent="Menu"]
+visible = false
+margin_left = 167.0
+margin_top = 31.0
+margin_right = 326.0
+margin_bottom = 194.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Menu/Leaderboard"]
+margin_right = 159.0
+margin_bottom = 15.0
+text = "		  Leaderboard"
+fit_content_height = true
+
+[node name="Container" type="VBoxContainer" parent="Menu/Leaderboard"]
+margin_top = 19.0
+margin_right = 159.0
+margin_bottom = 34.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Menu/Leaderboard/Container"]
+margin_right = 159.0
+margin_bottom = 15.0
+bbcode_enabled = true
+bbcode_text = "[code]Loading...[/code]"
+text = "Loading..."
+fit_content_height = true
+
+[node name="Refresh" type="Button" parent="Menu/Leaderboard"]
+margin_top = 38.0
+margin_right = 159.0
+margin_bottom = 58.0
+text = "Refresh"
+
+[node name="Main" type="Button" parent="Menu/Leaderboard"]
+margin_top = 62.0
+margin_right = 159.0
+margin_bottom = 82.0
+text = "Main Menu"
+
+[node name="NetworkManager" type="Node" parent="."]
+script = ExtResource( 4 )
+
+[node name="Getter" type="HTTPRequest" parent="NetworkManager"]
+
+[node name="Poster" type="HTTPRequest" parent="NetworkManager"]
+
 [connection signal="button_up" from="Menu/Main/Launch" to="." method="_on_Launch_button_up"]
-[connection signal="button_up" from="Menu/Main/Quit" to="." method="_on_Quit_button_up"]
+[connection signal="button_up" from="Menu/Main/Leaderboard" to="." method="_on_Leaderboard_button_up"]
 [connection signal="button_up" from="Menu/Main/Difficulty" to="." method="_on_Difficulty_button_up"]
+[connection signal="button_up" from="Menu/Main/Quit" to="." method="_on_Quit_button_up"]
 [connection signal="button_up" from="Menu/Difficulty/Main" to="." method="_on_Main_button_up"]
 [connection signal="button_up" from="Menu/Difficulty/Reset Scores" to="." method="_on_Reset_Scores_button_up"]
+[connection signal="button_down" from="Menu/GameOver/Buttons/Top/tb1" to="." method="_on_tb1_button_down"]
+[connection signal="button_down" from="Menu/GameOver/Buttons/Top/tb2" to="." method="_on_tb2_button_down"]
+[connection signal="button_down" from="Menu/GameOver/Buttons/Top/tb3" to="." method="_on_tb3_button_down"]
+[connection signal="button_down" from="Menu/GameOver/Buttons/Bottom/bb1" to="." method="_on_bb1_button_down"]
+[connection signal="button_down" from="Menu/GameOver/Buttons/Bottom/bb2" to="." method="_on_bb2_button_down"]
+[connection signal="button_down" from="Menu/GameOver/Buttons/Bottom/bb3" to="." method="_on_bb3_button_down"]
+[connection signal="button_down" from="Menu/GameOver/Submit" to="." method="_on_Submit_button_down"]
 [connection signal="button_up" from="Menu/GameOver/Main" to="." method="_on_Main_button_up"]
 [connection signal="button_up" from="Menu/GameOver/Quit" to="." method="_on_Quit_button_up"]
 [connection signal="button_up" from="Menu/Pause/Resume" to="." method="_on_Resume_button_up"]
 [connection signal="button_up" from="Menu/Pause/Main" to="." method="_on_Main_button_up"]
 [connection signal="button_up" from="Menu/Pause/Quit" to="." method="_on_Quit_button_up"]
+[connection signal="button_down" from="Menu/Leaderboard/Refresh" to="." method="_on_Refresh_button_down"]
+[connection signal="button_up" from="Menu/Leaderboard/Main" to="." method="_on_Main_button_up"]
+[connection signal="get_completed" from="NetworkManager" to="." method="_on_NetworkManager_get_completed"]

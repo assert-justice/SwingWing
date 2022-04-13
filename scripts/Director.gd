@@ -6,7 +6,8 @@ var interps = []
 var audio_player: AudioStreamPlayer = null
 
 func _ready():
-	inc()
+	pass
+	#inc()
 
 func _process(delta):
 	for interp in interps:
@@ -71,6 +72,7 @@ func inc():
 						interps.append([em, Vector2(em.position), Vector2(0, 0)])
 			else:
 				em.set_pool("enemy_flanker")
+				em.position.x = 0
 		$Timer.wait_time = randf() * 20 + 10
 	$Timer.start()
 	

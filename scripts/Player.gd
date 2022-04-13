@@ -8,6 +8,7 @@ export var mode = 0
 export var lives = 2
 export var invuln_time = 1.0
 export var invuln_clock = 0.0
+export var point_multiplier = 1.0
 onready var display = get_tree().get_nodes_in_group("Display" + str(mode))[0]
 var frame = 1
 var chain_length = 0
@@ -26,7 +27,7 @@ func register(points):
 		chain_length += 1
 		if chain_length > best_chain:
 			best_chain = chain_length
-	score += chain_length * points
+	score += chain_length * points * point_multiplier
 	display_update()
 	chain_clock = chain_time
 
@@ -60,7 +61,7 @@ func damage(dam, origin = null):
 func ressurect():
 	position = spawn_point
 	$AnimationPlayer.play("enter")
-	lives = root.lives
+	lives = root.get_lives()
 	visible = true
 	awake = true
 	invuln_clock = invuln_time
@@ -84,7 +85,7 @@ func _ready():
 func _physics_process(delta):
 	if not awake:
 		return
-	var game_credits = root.credits
+	var game_credits = root.get_credits()
 	if credits != game_credits:
 		credits = game_credits
 		display_update()

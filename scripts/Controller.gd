@@ -25,9 +25,9 @@ func update(delta):
 	else:
 		spin_button = 0
 	var move_vec = Input.get_vector(ip("left"), ip("right"), ip("up"), ip("down"))
-	if input_name == "mk":
-		move = move_vec
-		return
+	#if input_name == "mk":
+		#move = move_vec
+		#return
 	var alt_vec = Input.get_vector(ip("left_alt"), ip("right_alt"), ip("up_alt"), ip("down_alt"))
 	if alt_vec.length() > 0:
 		move = alt_vec

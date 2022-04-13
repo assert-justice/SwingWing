@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/together.mp3-236b931c820866eb38093572969fb379.mp3str"
+
+[deps]
+
+source_file="res://music/together.mp3"
+dest_files=[ "res://.import/together.mp3-236b931c820866eb38093572969fb379.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
