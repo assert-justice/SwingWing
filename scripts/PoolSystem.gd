@@ -6,6 +6,7 @@ export (PackedScene) var bullet_scene
 export (PackedScene) var enemy_bullet_scene
 export (PackedScene) var enemy_basic_scene
 export (PackedScene) var enemy_flanker_scene
+export (PackedScene) var enemy_wheel_scene
 export (PackedScene) var enemy_miniboss_scene
 export (PackedScene) var enemy_boss_scene
 
@@ -17,6 +18,7 @@ func _ready():
 		"enemy_bullet" : Pool.new(enemy_bullet_scene),
 		"enemy_basic" : Pool.new(enemy_basic_scene),
 		"enemy_flanker" : Pool.new(enemy_flanker_scene),
+		"enemy_wheel" : Pool.new(enemy_wheel_scene),
 		"enemy_miniboss" : Pool.new(enemy_miniboss_scene),
 		"enemy_boss" : Pool.new(enemy_boss_scene),
 	}

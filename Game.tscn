@@ -21,11 +21,11 @@ bullet_scene = ExtResource( 1 )
 enemy_bullet_scene = ExtResource( 5 )
 enemy_basic_scene = ExtResource( 4 )
 enemy_flanker_scene = ExtResource( 8 )
+enemy_wheel_scene = ExtResource( 11 )
 
 [node name="RedEmitter" parent="." instance=ExtResource( 6 )]
-pool_name = "enemy_basic"
+pool_name = "enemy_wheel"
 fire_time = 3.0
-enabled = false
 direction = Vector2( 0, 1 )
 speed = 10
 
@@ -87,7 +87,5 @@ __meta__ = {
 }
 
 [node name="Timer" type="Timer" parent="."]
-
-[node name="EnemyBase" parent="." instance=ExtResource( 11 )]
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
