@@ -1,6 +1,6 @@
 extends Entity
 
-class_name EnemyWheel
+class_name EnemyBase
 
 var path_idx = 0
 var path = [0,1,2,3]
@@ -30,14 +30,17 @@ export var max_health = 10.0
 	#print(damage)
 
 func _ready():
+	velocity = Vector2.ZERO
 	set_mode(0)
 	for em in $Body/Emitters.get_children():
 		emitters.push_back(em)
-	wake()
+	#wake()
 
 func _physics_process(delta):
 	if not alive:
 		return
+	velocity = Vector2.ZERO
+	._physics_process(delta)
 	$Body.position = lerp(next_pos, last_pos, $PathTimer.time_left / $PathTimer.wait_time)
 	$Body.rotation = lerp_angle(next_facing, last_facing, $FacingTimer.time_left / $FacingTimer.wait_time)
 	if flicker_count > 0:
@@ -51,19 +54,25 @@ func _physics_process(delta):
 			else:
 				$Body/AnimatedSprite.frame = mode
 
+func mode_toggle():
+	if mode % 2 == 0:
+		set_mode(mode + 1)
+	else:
+		set_mode(mode - 1)
+
 func set_emitter_enabled(status):
 	for em in emitters:
 		em.enabled = status
 
 func set_emitter_mode(mode):
 	for em in emitters:
-		em.mode = mode
+		em.set_mode(mode)
 
 func find_emmiters():
 	pass
 
-func path_update():
-	var index = path[path_idx]
+func path_update(index = null):
+	index = path[path_idx]
 	path_idx += 1
 	last_pos = $Body.position
 	last_facing = $Body.rotation
@@ -87,7 +96,6 @@ func path_update():
 		next_pos = Vector2(50, 200)
 		#next_facing = Vector2.LEFT
 		next_facing = deg2rad(270)
-		pass
 	$PathTimer.wait_time = (last_pos - next_pos).length() / speed
 	$PathTimer.start()
 	$FacingTimer.wait_time = 0.5
@@ -107,16 +115,19 @@ func sleep():
 		return
 	print("sleep")
 	$DieTimer.start()
-	$DieSfx.play()
+	$Body/DieSfx.play()
 	$Body/DieParticle.restart()
 	alive = false
 	$Body/DamageParticle.emitting = false
+	$Body/DamageParticle.visible = false
+	$Body/DieParticle.visible = true
 	set_emitter_enabled(false)
 
 func damage(dam, damage_origin):
 	.damage(dam, damage_origin)
 	$Body/DamageParticle.restart()
 	$Body/DamageParticle.amount = 100 - health * 10
+	$Body/DamageParticle.visible = true
 	flicker_count = 3
 
 func set_mode(mode):
@@ -143,4 +154,6 @@ func _on_DieTimer_timeout():
 	$Body.position = Vector2.ZERO
 	$Body.rotation = 0
 	$Body/DieParticle.emitting = false
+	$Body/DamageParticle.emitting = false
+	$Body/DieParticle.visible = false
 	health = max_health

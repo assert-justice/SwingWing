@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://scripts/EnemyBase.gd" type="Script" id=1]
+[ext_resource path="res://scripts/EnemyWheel.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Shield.gd" type="Script" id=2]
 [ext_resource path="res://sprites/Enemy.png" type="Texture" id=3]
 [ext_resource path="res://Emitter.tscn" type="PackedScene" id=4]
@@ -45,11 +45,11 @@ animations = [ {
 [sub_resource type="CircleShape2D" id=2]
 radius = 32.0
 
-[node name="EnemyBase" type="Node2D"]
+[node name="EnemyWheel" type="Node2D"]
 script = ExtResource( 1 )
-health = 10.0
 
 [node name="PathTimer" type="Timer" parent="."]
+wait_time = 0.5
 one_shot = true
 
 [node name="FacingTimer" type="Timer" parent="."]
@@ -75,22 +75,11 @@ fire_time = 0.3
 direction = Vector2( 0, 1 )
 speed = 150
 
-[node name="Emitter2" parent="Body/Emitters" instance=ExtResource( 4 )]
-pool_name = "enemy_bullet"
-enabled = false
-direction = Vector2( 0.3, 1 )
-speed = 150
-
-[node name="Emitter3" parent="Body/Emitters" instance=ExtResource( 4 )]
-pool_name = "enemy_bullet"
-enabled = false
-direction = Vector2( -0.3, 1 )
-speed = 150
-
 [node name="DieParticle" type="CPUParticles2D" parent="Body"]
 emitting = false
 amount = 400
 lifetime = 0.5
+one_shot = true
 preprocess = 1.0
 explosiveness = 1.0
 lifetime_randomness = 0.68

@@ -17,6 +17,8 @@ var root = null
 
 var pool : Pool
 
+class_name Emitter
+
 func set_pool(pool_name):
 	self.pool_name = pool_name
 	var pool_system : PoolSystem = get_tree().get_nodes_in_group("PoolSystem")[0]
@@ -43,15 +45,21 @@ func set_origin(origin):
 func wake():
 	fire_clock = fire_delay
 
+func set_delay(delay):
+	fire_delay = delay
+	fire_clock = delay
+
+func set_mode(mode):
+	self.mode = mode
+
 func _physics_process(delta):
 	if fire_clock > 0:
 		fire_clock -= delta
 	else:
 		fire_clock = fire_time
-		if enabled or once:
+		if enabled:
 			if once:
 				enabled = false
-				once = false
 			fire()
 
 func fire():
