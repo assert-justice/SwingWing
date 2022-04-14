@@ -8,6 +8,8 @@ func wake():
 	last_pos = $Body.position
 	#next_pos = $Body.position
 	path_update(randi() % 4)
+	for em in emitters:
+		em.fire_time = 0.5
 
 func path_update(index = null):
 	if index:

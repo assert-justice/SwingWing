@@ -27,7 +27,7 @@ func _ready():
 		"enemy_boss" : Pool.new(enemy_boss_scene),
 	}
 	pools["enemy_wheel"].max_size = 2
-	pools["enemy_box"].max_size = 1
+	pools["enemy_box"].max_size = 3
 	pools["enemy_miniboss"].max_size = 1
 	pools["enemy_basic"].max_size = 8
 	pools["enemy_mine"].max_size = 8

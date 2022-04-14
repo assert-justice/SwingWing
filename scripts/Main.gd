@@ -211,6 +211,7 @@ func get_lives():
 	return settings["lives"]
 
 func launch():
+	seed(0)
 	save_settings()
 	$Menu/Main/P1Controls.selected
 	Engine.time_scale = [0.5, 1.0, 1.5][settings["speed"]]

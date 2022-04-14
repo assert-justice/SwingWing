@@ -29,43 +29,6 @@ enemy_box_scene = ExtResource( 12 )
 enemy_mine_scene = ExtResource( 14 )
 enemy_miniboss_scene = ExtResource( 13 )
 
-[node name="RedEmitter" parent="." instance=ExtResource( 6 )]
-pool_name = "enemy_miniboss"
-fire_time = 10.0
-direction = Vector2( 0, 1 )
-speed = 10
-
-[node name="BlueEmitter" parent="." instance=ExtResource( 6 )]
-position = Vector2( 233, 0 )
-pool_name = "enemy_basic"
-fire_time = 3.0
-fire_delay = 1.5
-enabled = false
-direction = Vector2( 0, 1 )
-speed = 10
-mode = 1
-
-[node name="GreenEmitter" parent="." instance=ExtResource( 6 )]
-pool_name = "enemy_basic"
-fire_time = 3.0
-fire_delay = 0.75
-enabled = false
-direction = Vector2( 0, 1 )
-speed = 10
-mode = 2
-player_flag = 2
-
-[node name="PurpleEmitter" parent="." instance=ExtResource( 6 )]
-position = Vector2( 233, 0 )
-pool_name = "enemy_basic"
-fire_time = 3.0
-fire_delay = 2.25
-enabled = false
-direction = Vector2( 0, 1 )
-speed = 10
-mode = 3
-player_flag = 2
-
 [node name="DiscoVoid" type="AudioStreamPlayer" parent="." groups=["Music"]]
 stream = ExtResource( 9 )
 
@@ -93,5 +56,33 @@ __meta__ = {
 }
 
 [node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="Emitters" type="Node2D" parent="."]
+
+[node name="RedEmitter" parent="Emitters" instance=ExtResource( 6 )]
+pool_name = "enemy_basic"
+fire_time = 3.0
+enabled = false
+direction = Vector2( 0, 1 )
+speed = 10
+
+[node name="BlueEmitter" parent="Emitters" instance=ExtResource( 6 )]
+position = Vector2( 233, 0 )
+pool_name = "enemy_basic"
+fire_time = 3.0
+enabled = false
+direction = Vector2( 0, 1 )
+speed = 10
+mode = 1
+
+[node name="GreenEmitter" parent="Emitters" instance=ExtResource( 6 )]
+pool_name = "enemy_basic"
+fire_time = 3.0
+fire_delay = 0.75
+enabled = false
+direction = Vector2( 0, 1 )
+speed = 10
+mode = 2
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

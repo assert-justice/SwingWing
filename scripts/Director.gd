@@ -1,13 +1,18 @@
 extends Node2D
 
-var index = -1
+var index = 5
 
 var interps = []
+var emitters = []
 var audio_player: AudioStreamPlayer = null
+var player_count
 
 func _ready():
 	pass
 	#inc()
+	for em in $Emitters.get_children():
+		emitters.push_back(em)
+	player_count = get_tree().root.get_child(0).player_count
 
 func _process(delta):
 	for interp in interps:
@@ -20,60 +25,83 @@ func _process(delta):
 	if audio_player and not audio_player.playing:
 		 audio_player.play()
 
+func help(em, mode, pool, x = 0, delay = 0, time = 3):
+	em.enable()
+	em.position.x = x
+	em.set_mode(mode)
+	em.set_pool(pool)
+	em.set_delay(delay)
+	em.fire_time = time
+
 func inc():
 	index += 1
 	interps = []
+	var lx = 100
+	var hx = 233
+	for em in emitters:
+		em.enabled = false
+	$Timer.wait_time = 16
 	if index == 0:
-		interps.append([$RedEmitter, Vector2($RedEmitter.position), Vector2($BlueEmitter.position)])
-		interps.append([$BlueEmitter, Vector2($BlueEmitter.position), Vector2($RedEmitter.position)])
-		interps.append([$GreenEmitter, Vector2($GreenEmitter.position), Vector2($BlueEmitter.position)])
-		interps.append([$PurpleEmitter, Vector2($PurpleEmitter.position), Vector2($RedEmitter.position)])
-		$Timer.wait_time = 16
+		# gentle intro
+		help(emitters[0], 0, "enemy_basic", 170)
+		help(emitters[1], 1, "enemy_basic", 170, 1.5)
+		if player_count == 2:
+			help(emitters[2], 2, "enemy_basic",  170, 0.7)
+		pass
 	elif index == 1:
-		$RedEmitter.fire_time = 1.5
-		$BlueEmitter.fire_time = 1.5
-		$GreenEmitter.fire_time = 1.5
-		$PurpleEmitter.fire_time = 1.5
-		$Timer.wait_time = 16
+		# ramp up with flankers
+		help(emitters[0], 0, "enemy_flanker")
+		help(emitters[1], 1, "enemy_flanker", 0, 1.5)
+		if player_count == 2:
+			help(emitters[3], 3, "enemy_flanker",  170, 0.7)
+		pass
 	elif index == 2:
-		$RedEmitter.fire_time = 4
-		$RedEmitter.position = Vector2.ZERO
-		$RedEmitter.set_pool("enemy_flanker")
-		$RedEmitter.fire_delay = 0
-		$RedEmitter.wake()
-		$BlueEmitter.fire_time = 4
-		$BlueEmitter.set_pool("enemy_flanker")
-		$BlueEmitter.fire_delay = 2
-		$BlueEmitter.wake()
-		$GreenEmitter.fire_time = 4
-		$GreenEmitter.position = Vector2.ZERO
-		$GreenEmitter.set_pool("enemy_flanker")
-		$GreenEmitter.fire_delay = 1
-		$GreenEmitter.wake()
-		$PurpleEmitter.fire_time = 4
-		$PurpleEmitter.set_pool("enemy_flanker")
-		$PurpleEmitter.fire_delay = 3
-		$PurpleEmitter.wake()
-		$Timer.wait_time = 30
+		# ace enemy
+		help(emitters[0], 0, "enemy_wheel", 0, 0, 5)
+		#help(emitters[1], 1, "enemy_flanker", 170, 1.5)
+		if player_count == 2:
+			help(emitters[2], 2, "enemy_wheel",  0, 0.15, 5)
+		pass
 	elif index == 3:
-		index = 2
-		var ems = [$RedEmitter, $BlueEmitter, $GreenEmitter, $PurpleEmitter]
-		for em in ems:
-			em.fire_time = randf() * 2 + 1
-			em.fire_delay = randf() * em.fire_time
-			var type = floor(randf() * 2)
-			if type == 0:
-				em.set_pool("enemy_basic")
-				var switch = randf() < 0.5
-				if switch:
-					if em.position.x < 100:
-						interps.append([em, Vector2(em.position), Vector2(233, 0)])
-					else:
-						interps.append([em, Vector2(em.position), Vector2(0, 0)])
-			else:
-				em.set_pool("enemy_flanker")
-				em.position.x = 0
-		$Timer.wait_time = randf() * 20 + 10
+		# boxes!
+		var first = randi()%2
+		help(emitters[0], first, "enemy_box", 0, 0, 5)
+		help(emitters[1], 1-first, "enemy_box", 0, 2.5, 5)
+		if player_count == 2:
+			help(emitters[2], randi()%2 + 2, "enemy_box",0,0,5)
+		pass
+	elif index == 4:
+		$Timer.wait_time = 5
+		pass
+	elif index == 5:
+		# the miniboss
+		help(emitters[0], 0, "enemy_miniboss")
+		if player_count == 2:
+			help(emitters[0], randi()%2 + 2, "enemy_miniboss",0,0,5)
+		pass
+		pass
+	elif index == 6:
+		# random onslaught
+		index = 5
+		var probs = ["basic","basic","basic","flanker","flanker","wheel","box","miniboss"]
+		var modes = [0,1]
+		if player_count == 2:
+			modes = [[0,1,2],[0,1,3],[0,2,3],[1,2,3]][randi()%4]
+		for m in modes:
+			var enem = "enemy_" + probs[randi()%8]
+			var x = 0
+			var time = 3
+			if enem == "enemy_basic":
+				x += rand_range(0, 233)
+			elif enem == "enemy_wheel":
+				time = 7
+			elif enem == "enemy_box":
+				time = 5
+			elif enem == "enemy_miniboss":
+				time = 10
+			help(emitters[m], m, enem, x, rand_range(0, time/2), time)
+		$Timer.wait_time = rand_range(5, 20)
+		pass
 	$Timer.start()
 	
 

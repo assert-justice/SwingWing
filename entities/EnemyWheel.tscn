@@ -75,6 +75,18 @@ fire_time = 0.3
 direction = Vector2( 0, 1 )
 speed = 150
 
+[node name="Emitter2" parent="Body/Emitters" instance=ExtResource( 4 )]
+pool_name = "enemy_bullet"
+fire_time = 0.3
+direction = Vector2( 0.3, 1 )
+speed = 150
+
+[node name="Emitter3" parent="Body/Emitters" instance=ExtResource( 4 )]
+pool_name = "enemy_bullet"
+fire_time = 0.3
+direction = Vector2( -0.3, 1 )
+speed = 150
+
 [node name="DieParticle" type="CPUParticles2D" parent="Body"]
 emitting = false
 amount = 400
