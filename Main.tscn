@@ -166,12 +166,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Reset Scores" type="Button" parent="Menu/Difficulty"]
-margin_top = 19.0
-margin_right = 159.0
-margin_bottom = 39.0
-text = "Reset Scores"
-
 [node name="GameOver" type="VBoxContainer" parent="Menu"]
 margin_left = 167.0
 margin_top = 9.0
@@ -394,7 +388,6 @@ script = ExtResource( 4 )
 [connection signal="button_up" from="Menu/Main/Difficulty" to="." method="_on_Difficulty_button_up"]
 [connection signal="button_up" from="Menu/Main/Quit" to="." method="_on_Quit_button_up"]
 [connection signal="button_up" from="Menu/Difficulty/Main" to="." method="_on_Main_button_up"]
-[connection signal="button_up" from="Menu/Difficulty/Reset Scores" to="." method="_on_Reset_Scores_button_up"]
 [connection signal="button_down" from="Menu/GameOver/Buttons/Top/tb1" to="." method="_on_tb1_button_down"]
 [connection signal="button_down" from="Menu/GameOver/Buttons/Top/tb2" to="." method="_on_tb2_button_down"]
 [connection signal="button_down" from="Menu/GameOver/Buttons/Top/tb3" to="." method="_on_tb3_button_down"]

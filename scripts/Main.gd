@@ -62,7 +62,7 @@ func _ready():
 		$Menu/Difficulty/Credits.add_item(text)
 	for c in range(0, 6):
 		var text = str(c)
-		if c > 3:
+		if c > 2:
 			text += " (no points)"
 		$Menu/Difficulty/Lives.add_item(text)
 	for op in control_options:
@@ -211,7 +211,7 @@ func get_lives():
 	return settings["lives"]
 
 func launch():
-	seed(0)
+	randomize()
 	save_settings()
 	$Menu/Main/P1Controls.selected
 	Engine.time_scale = [0.5, 1.0, 1.5][settings["speed"]]
@@ -250,6 +250,7 @@ func launch():
 		else:
 			temp_jam = settings["jam_idx"] - 1
 		music_players[temp_jam].play()
+	seed(temp_jam)
 	for player in players:
 		game.add_child(player)
 		player.set_mode(player.mode, true)

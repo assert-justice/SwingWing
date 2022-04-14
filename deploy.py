@@ -35,7 +35,7 @@ def deploy():
         #subprocess.run(comm)
         path, _ = os.path.split(path)
         channel = lookup[name]
-        comm = f"butler push {path} etmm/swing-wing:{channel}".split()
+        comm = f"butler push {path} etmm/swing-wing-redux:{channel}".split()
         subprocess.run(comm)
 
 if __name__ == "__main__":

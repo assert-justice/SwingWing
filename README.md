@@ -1,13 +1,42 @@
-# Integer Resolution Handler
+# Swing Wing
+Welcome to Swing Wing! A shmup for my friend Andy.
 
-Alternative stretch handler for low resolution (pixel art) games in high resolution windows. Restricts the game resolution to integer steps, keeping pixels square.
+Kill waves of enemies. Bullets that are the same color as your ship can't hurt you! Swap between two different modes as you dodge bullets. Supports single player and co-op
 
-## Usage
+Keyboard Controls:
 
-1. Enable the plugin. Close Project Settings.
-2. Navigate Project Settings to the `display/window` category.
-3. In the new section "Integer Resolution Handler", set Base Width and Base Height to your game's native pixel resolution.
+Move with WASD
 
-The IntegerResolutionHandler also works with all of the existing `stretch` settings, so fiddle there if you don't like how it behaves. Notably, setting `stretch/aspect` to "Keep" will enforce strict screen resolutions, while "Expand" will allow the viewable area to extend dramatically in all directions between scale steps.
+Fire with Space
 
-If you set Base Width and Base Height to a 4:3 aspect ratio and use the "Keep Height" or "Expand" aspect handling modes, your game will extend horizontally to support widescreen aspects as well. Just make sure your game is fully playable at its base resolution and GUI elements properly stretch and move, the same as you would for a non-pixel art game.
+Mode shift with Shift
+
+Alternate Keyboard Controls:
+
+Fire with Ctrl
+
+Mode shift with Alt
+
+(If someone has an idea for a less crap alternate control scheme let me know)
+
+Xbox Controls (pick joy0 or joy1 in the control options, should work with other controllers)
+
+Move with left stick or D-pad
+
+Fire with A
+
+Mode shift with B
+
+Credits:
+
+"Art", design, and programming by Riley Miller.
+
+Music by Jonah Christian (Disco Void), Jonathan Gibson (Glimmers), and the birthday boy himself Andy (Together)
+
+Known Issues:
+
+For reasons that are inscrutable to me the web version's leaderboard doesn't work. Just use the native version if you're competitive.
+
+The scoring system has an exploit but I kind of like it. Mum's the word tho.
+
+I would do some dark s*** for an explanation of how to use monospace fonts in Godot.

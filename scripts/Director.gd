@@ -1,6 +1,6 @@
 extends Node2D
 
-var index = 5
+var index = -1
 
 var interps = []
 var emitters = []
@@ -65,10 +65,10 @@ func inc():
 	elif index == 3:
 		# boxes!
 		var first = randi()%2
-		help(emitters[0], first, "enemy_box", 0, 0, 5)
-		help(emitters[1], 1-first, "enemy_box", 0, 2.5, 5)
+		help(emitters[0], first, "enemy_box", 0, 0, 9)
+		help(emitters[1], 1-first, "enemy_box", 0, 2.5, 9)
 		if player_count == 2:
-			help(emitters[2], randi()%2 + 2, "enemy_box",0,0,5)
+			help(emitters[2], randi()%2 + 2, "enemy_box",0,0,9)
 		pass
 	elif index == 4:
 		$Timer.wait_time = 5

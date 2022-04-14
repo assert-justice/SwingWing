@@ -2,7 +2,7 @@ extends Node
 
 class_name NetworkManager
 
-export var url = "http://127.0.0.1:5000/?game=swingwing"
+export var url = "http://assertjustice.pythonanywhere.com/?game=swingwing"
 
 func _ready():
 	$Getter.connect("request_completed", self, "_on_get_completed")
@@ -17,6 +17,7 @@ func post_score(name, score):
 
 func _on_get_completed(result, response_code, headers, body):
 	var json = JSON.parse(body.get_string_from_utf8()).result
+	print(json)
 	emit_signal("get_completed", json)
 
 func _on_post_completed(result, response_code, headers, body):
